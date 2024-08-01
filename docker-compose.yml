@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: fleet_backend
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=${APP_ENV}
+      - APP_PORT=${APP_PORT}
+      - APP_ENV=${APP_ENV}
+      - APP_MONGO_URI=${APP_MONGO_URI}
+      - APP_MONGO_INITDB_ROOT_USERNAME=${APP_MONGO_INITDB_ROOT_USERNAME}
+      - APP_MONGO_INITDB_ROOT_PASSWORD=${APP_MONGO_INITDB_ROOT_PASSWORD}
+    command: npm run start:dev
+    networks:
+      - fleet_network
+
+  mongo:
+    image: mongo:latest
+    container_name: fleet_mongo_db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${APP_MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${APP_MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - fleet_network
+
+
+volumes:
+  mongo_data:
+
+networks:
+  fleet_network:
+    external: false
