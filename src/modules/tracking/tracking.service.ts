@@ -9,6 +9,7 @@ import {
   TrackingQueue,
 } from '../queues/tracking.queue';
 import { Queue } from 'bullmq';
+import { TrackingReportOutputDto } from './dtos/get-tracking-report.dto';
 
 @Injectable()
 export class TrackingService {
@@ -106,7 +107,9 @@ export class TrackingService {
         },
       ];
 
-      return await this.trackingModel.aggregate(pipeline);
+      return await this.trackingModel.aggregate<TrackingReportOutputDto>(
+        pipeline,
+      );
     } catch (error) {
       console.log('error in aggregate', error);
     }

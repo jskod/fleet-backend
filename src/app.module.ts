@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -31,7 +29,6 @@ import { CreateTrackingConsumer } from './modules/queues/consumers/create-tracki
     VehicleModule,
     TrackingModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, CreateTrackingConsumer],
+  providers: [CreateTrackingConsumer],
 })
 export class AppModule {}
