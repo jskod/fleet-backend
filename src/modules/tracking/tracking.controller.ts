@@ -7,19 +7,21 @@ export class TrackingController {
 
   @Post()
   async addTracking(@Body() data: any) {
-    console.log('data received', data);
     return this.trackingService.insert(data);
   }
 
   @Post('/queue')
   async addTrackingToQueue(@Body() data: any) {
-    console.log('data received', data);
     return this.trackingService.insertWithQueue(data);
   }
 
   @Get(':vehicleId')
   async list(@Param('vehicleId') vehicleId: string) {
-    console.log('data received', vehicleId);
     return this.trackingService.list(vehicleId);
+  }
+
+  @Get('/report/:vehicleId')
+  async report(@Param('vehicleId') vehicleId: string) {
+    return this.trackingService.getVehicleReport(vehicleId);
   }
 }
