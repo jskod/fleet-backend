@@ -5,6 +5,8 @@ import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TrackingModule } from './modules/tracking/tracking.module';
+import { BullModule } from '@nestjs/bullmq';
+import { CreateTrackingConsumer } from './modules/queues/consumers/create-tracking-consumer';
 
 @Module({
   imports: [
@@ -15,10 +17,21 @@ import { TrackingModule } from './modules/tracking/tracking.module';
       },
       inject: [ConfigService],
     }),
+    BullModule.forRootAsync({
+      useFactory: (configService: ConfigService) => {
+        return {
+          connection: {
+            host: configService.get('APP_REDIS_HOST'),
+            port: parseInt(configService.get('APP_REDIS_PORT')) || 6379,
+          },
+        };
+      },
+      inject: [ConfigService],
+    }),
     VehicleModule,
     TrackingModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CreateTrackingConsumer],
 })
 export class AppModule {}
