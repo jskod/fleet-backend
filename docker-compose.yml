@@ -30,6 +30,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${APP_MONGO_INITDB_ROOT_PASSWORD}
     volumes:
       - mongo_data:/data/db
+      - ./.scripts/seed-db.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - fleet_network
 
