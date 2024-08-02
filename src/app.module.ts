@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TrackingModule } from './modules/tracking/tracking.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       inject: [ConfigService],
     }),
     VehicleModule,
+    TrackingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
