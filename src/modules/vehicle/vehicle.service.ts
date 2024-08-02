@@ -21,8 +21,7 @@ export class VehicleService {
       throw new ConflictException('Vehicle already exists');
     }
 
-    const newVehicle = new this.vehicleModel(data);
-    return newVehicle.save();
+    return await this.vehicleModel.create(data);
   }
 
   async listVehicles(): Promise<Vehicle[]> {
@@ -32,8 +31,7 @@ export class VehicleService {
   async createMaintenanceLog(
     data: CreateMaintenanceLogDto,
   ): Promise<Maintenance> {
-    const newLog = new this.maintenanceModel(data);
-    return newLog.save();
+    return await this.maintenanceModel.create(data);
   }
 
   async getMaintenanceLogs(vehicleId: string): Promise<Maintenance[]> {

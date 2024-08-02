@@ -20,8 +20,7 @@ export class TrackingService {
   ) {}
 
   async insert(data: CreateTrackingDto) {
-    const newTracking = new this.trackingModel(data);
-    await newTracking.save();
+    return await this.trackingModel.create(data);
   }
 
   async list(vehicleId: string) {
@@ -30,7 +29,7 @@ export class TrackingService {
 
   async insertWithQueue(data: CreateTrackingDto) {
     try {
-      await this.trackingQueue.add('add-tracking', data);
+      return await this.trackingQueue.add('add-tracking', data);
     } catch (error) {
       console.error(error);
     }
