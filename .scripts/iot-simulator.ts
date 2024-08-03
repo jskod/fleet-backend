@@ -116,8 +116,6 @@ const generateDeviceData = (vehicleId: string): DeviceData => {
 
 const sendDeviceData = async (deviceData: DeviceData) => {
   try {
-    console.log(deviceData);
-
     const response = await fetch(SERVER_URL, {
       body: JSON.stringify(deviceData),
       method: 'POST',
