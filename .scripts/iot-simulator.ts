@@ -6,7 +6,7 @@ const SIMULATION_INTERVAL =
   parseInt(process.env.APP_SIMULATION_INTERVAL) || 5000;
 const NUMBER_OF_DEVICES = parseInt(process.env.NUMBER_OF_DEVICES) || 10;
 const SERVER_URL =
-  process.env.SERVER_URL || 'http://localhost:3000/tracking/queue';
+  process.env.SERVER_URL || 'http://localhost:3000/api/v1/tracking/queue';
 
 // Following vehicleIds are used for db seeding
 // keeping vehicleIds hardcoded for demo and simulate data
