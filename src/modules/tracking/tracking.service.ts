@@ -106,9 +106,9 @@ export class TrackingService {
         },
       ];
 
-      return await this.trackingModel.aggregate<TrackingReportOutputDto>(
-        pipeline,
-      );
+      const result =
+        await this.trackingModel.aggregate<TrackingReportOutputDto>(pipeline);
+      return result[0];
     } catch (error) {
       console.log('error in aggregate', error);
     }

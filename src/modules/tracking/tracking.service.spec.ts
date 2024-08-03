@@ -245,10 +245,10 @@ describe('TrackingService', () => {
     const result = await service.getVehicleReport('test-1');
 
     expect(mockTrackingModel.aggregate).toHaveBeenCalledWith(expect.any(Array));
-    expect(result).toEqual(expected);
+    expect(result).toEqual(expected[0]);
   });
 
-  it('should generate report from tracking history', async () => {
+  it('should handle error while generating report from tracking history', async () => {
     mockTrackingModel.aggregate = jest.fn().mockRejectedValueOnce(new Error());
 
     const spyConsole = jest.spyOn(console, 'log').mockImplementation(jest.fn());
