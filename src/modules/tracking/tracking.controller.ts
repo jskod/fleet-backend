@@ -10,6 +10,7 @@ import {
 import { CreateTrackingDto } from './dtos/create-tracking.dto';
 import { Tracking } from './models/tracking.model';
 import { TrackingReportOutputDto } from './dtos/get-tracking-report.dto';
+import { GeLiveLocationAndStatusOutputDto } from './dtos/ge-live-location-and-status.dto';
 
 @ApiTags('tracking')
 @Controller('tracking')
@@ -83,5 +84,19 @@ export class TrackingController {
   @ApiParam({ type: String, name: 'vehicleId' })
   async report(@Param('vehicleId') vehicleId: string) {
     return this.trackingService.getVehicleReport(vehicleId);
+  }
+
+  @ApiOperation({ summary: 'Live Track a vehicle' })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns status and coords for vehicle',
+    type: GeLiveLocationAndStatusOutputDto,
+  })
+  @ApiResponse({ status: 400, description: 'Invalid input data' })
+  @ApiParam({ type: String, name: 'vehicleId' })
+  @Get('/live/:vehicleId')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getVehicleLocationAndStatus(@Param('vehicleId') vehicleId: string) {
+    return this.trackingService.getVehicleLiveLocationData();
   }
 }

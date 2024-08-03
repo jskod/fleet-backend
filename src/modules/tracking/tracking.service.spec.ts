@@ -259,4 +259,15 @@ describe('TrackingService', () => {
     expect(result).toBeUndefined();
     expect(spyConsole).toHaveBeenCalled();
   });
+
+  it('should return vehicles simulated live data', async () => {
+    const data = service.getVehicleLiveLocationData();
+    expect(data).toEqual(
+      expect.objectContaining({
+        latitude: expect.any(Number),
+        longitude: expect.any(Number),
+        speed: expect.any(Number),
+      }),
+    );
+  });
 });

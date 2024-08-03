@@ -18,6 +18,7 @@ describe('TrackingController', () => {
             list: jest.fn(),
             insertWithQueue: jest.fn(),
             getVehicleReport: jest.fn(),
+            getVehicleLiveLocationData: jest.fn(),
           },
         },
       ],
@@ -103,5 +104,11 @@ describe('TrackingController', () => {
     await controller.report('test-1');
 
     expect(mockTrackingService.getVehicleReport).toHaveBeenCalledWith('test-1');
+  });
+
+  it('should return simulated live location', async () => {
+    await controller.getVehicleLocationAndStatus('test-1');
+
+    expect(mockTrackingService.getVehicleLiveLocationData).toHaveBeenCalled();
   });
 });

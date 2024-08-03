@@ -13,6 +13,12 @@ import { TrackingReportOutputDto } from './dtos/get-tracking-report.dto';
 
 @Injectable()
 export class TrackingService {
+  private vehicleData = {
+    latitude: 25.2048,
+    longitude: 55.2708,
+    speed: 50,
+  };
+
   constructor(
     @InjectModel(Tracking.name) private trackingModel: Model<TrackingDocument>,
     @InjectQueue(TrackingQueue)
@@ -112,5 +118,19 @@ export class TrackingService {
     } catch (error) {
       console.log('error in aggregate', error);
     }
+  }
+
+  getVehicleLiveLocationData() {
+    // Simulate real-time vehicle location data
+    // Will keep it within Dubai coords
+    const latitudeChange = (Math.random() - 0.5) / 100;
+    const longitudeChange = (Math.random() - 0.5) / 100;
+    const speedChange = Math.random() * 10 - 5;
+
+    this.vehicleData.latitude += latitudeChange;
+    this.vehicleData.longitude += longitudeChange;
+    this.vehicleData.speed = Math.max(0, this.vehicleData.speed + speedChange);
+
+    return this.vehicleData;
   }
 }
