@@ -107,6 +107,11 @@ Ensure you have the following installed:
    ```bash
    yarn run simulate:iot
    ```
+   
+
+## Database Seeding
+
+For this demo, database seeding is performed at the time of Docker container creation. `.scripts/seed-db.js` is used to seed 10 vehicles that will also be used for IoT Data simulation script `.scripts/iot-simulator.ts`.
 
 ## API Documentation
 
