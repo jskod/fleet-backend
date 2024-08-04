@@ -11,7 +11,11 @@ import { CreateTrackingConsumer } from './modules/queues/consumers/create-tracki
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       useFactory: (configService: ConfigService) => {
-        return { uri: configService.get('APP_MONGO_URI'), dbName: 'fleet_db' };
+        const isE2e = configService.get('NODE_ENV') === 'e2e';
+        return {
+          uri: configService.get('APP_MONGO_URI'),
+          dbName: isE2e ? 'fleet_db_e2e' : 'fleet_db',
+        };
       },
       inject: [ConfigService],
     }),

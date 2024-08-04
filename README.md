@@ -113,6 +113,44 @@ Ensure you have the following installed:
 
 For this demo, database seeding is performed at the time of Docker container creation. `.scripts/seed-db.js` is used to seed 10 vehicles that will also be used for IoT Data simulation script `.scripts/iot-simulator.ts`.
 
+## Unit Tests
+
+To run unit tests, just run following command:
+
+```bash
+yarn run test
+```
+
+Screenshot of all tests passing:
+
+<img width="669" alt="Screenshot 2024-08-05 at 2 34 24 AM" src="https://github.com/user-attachments/assets/569261da-0eb6-4b43-a0a3-149e7c0383e6">
+
+### Unit Test Coverage
+
+To run unit tests and see coverage report, run following command:
+
+```bash
+yarn run test:cov
+```
+
+Screenshot of coverage report: 100% unit test coverage.
+
+<img width="825" alt="Screenshot 2024-08-05 at 2 36 55 AM" src="https://github.com/user-attachments/assets/d10a0755-f4c9-47cd-85f8-b07c4ceef17d">
+
+
+## E2E Tests
+
+To run e2e test, we need to have all required components such as redis and mongodb database. If we don't have locally installed components; we can use docker to run the test for the sake of testing for this demo.
+Please note that for the sake of this assignment I only wrote e2e test for Vehicle Controller which should be good enough for assessment. 
+
+Follow the steps:
+   1. Run docker-compose using command `docker-compose up`.
+   2. Now find running docker container `docker ps`.
+   3. In our case container name is `fleet_backend` and we can start bash using command `docker exec -it fleet_backend /bin/sh`
+   4. Now once you are inside container's bash shell, run command `npm run test:e2e`. (we use npm here as we don't have yarn installed by default)
+
+
+
 ## API Documentation
 
 The API documentation is generated using Swagger. Once the application is running, access the documentation at:
